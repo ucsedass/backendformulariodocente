@@ -22,13 +22,21 @@ export class AppService {
   }
 
   async newFormulario(data) {
-    try {
-      let consulta = 'select * from ContactosDocentes';
-      await sql.connect(config);
-      const result = await sql.query(consulta);
-      return result.recordsets[0];
-    } catch (error) {
-      return error;
-    }
+    console.log('PARAMETROS:', data);
+    let pool = await sql.connect(config);
+    let result = await pool
+      .request()
+      .input('dni', sql.Int, parseInt(data.dni))
+      .input('nombre', sql.VarChar(61), data.nombre)
+      .input('apellido', sql.VarChar(61), data.apellido)
+      .input('sede', sql.VarChar(61), data.sede)
+      .input('tienecorreo', sql.VarChar(3), data.correo)
+      .execute('sp_newFormularioDocente')
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
+
+    return result;
   }
 }
