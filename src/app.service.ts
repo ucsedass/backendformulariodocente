@@ -18,7 +18,8 @@ var config = {
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'LLEGO AL SERVICIO_________________';
+    let a;
+    return 'LLEGO AL SERVICIO________  _________';
   }
 
   async newFormulario(data) {
@@ -33,7 +34,7 @@ export class AppService {
       .input('tienecorreo', sql.VarChar(3), data.correo)
       .execute('sp_newFormularioDocente')
       .catch((err) => {
-        console.log(err);
+        console.log('error', err);
         return err;
       });
 
