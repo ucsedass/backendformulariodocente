@@ -32,6 +32,12 @@ export class AppService {
       .input('apellido', sql.VarChar(61), data.apellido)
       .input('sede', sql.VarChar(61), data.sede)
       .input('tienecorreo', sql.VarChar(3), data.correo)
+      .input('correopersonal', sql.VarChar(100), data.correoPersonal)
+      .input('correoinstitucional', sql.VarChar(100), data.correoInstitucional)
+      .input('correoalternativo', sql.VarChar(100), data.correoAlternativo)
+      .input('referenciaacademica', sql.VarChar(500), data.referenciaAcademica)
+      .input('celularcodarea', sql.Int, parseInt(data.celCodArea))
+      .input('celularnro', sql.Int, parseInt(data.celular))
       .execute('sp_newFormularioDocente')
       .catch((err) => {
         console.log('error', err);
