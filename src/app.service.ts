@@ -19,7 +19,7 @@ var config = {
 export class AppService {
   getHello(): string {
     let a;
-    return 'LLEGO AL SERVICIO________  _________';
+    return 'LLEGO AL SERVICIO_________________';
   }
 
   async newFormulario(data) {
@@ -39,6 +39,21 @@ export class AppService {
       .input('celularcodarea', sql.Int, parseInt(data.celCodArea))
       .input('celularnro', sql.Int, parseInt(data.celular))
       .execute('sp_newFormularioDocente')
+      .catch((err) => {
+        console.log('error', err);
+        return err;
+      });
+
+    return result;
+  }
+
+  async buscarDocente(data: any) {
+    console.log('PARAMETROS:', data);
+    let pool = await sql.connect(config);
+    let result = await pool
+      .request()
+      .input('dni', sql.Int, parseInt(data.dni))
+      .execute('sp_buscarDocente')
       .catch((err) => {
         console.log('error', err);
         return err;

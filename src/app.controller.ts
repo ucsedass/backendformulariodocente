@@ -14,4 +14,9 @@ export class AppController {
   nuevoformulario(@Body() data: any) {
     return this.appService.newFormulario(data);
   }
+
+  @Post('/buscardocente')
+  buscardocente(@Body() data: any) {
+    return this.appService.buscarDocente(data);
+  }
 }
